@@ -7,7 +7,9 @@ require_once 'config/database.php';
 require_once 'Controleur/Controleur.class.php';
 require_once 'Controleur/ChienControleur.php';
 require_once 'Controleur/controleur_factory.class.php';
+require_once 'Controleur/RefugeControleur.php';
 
 require_once 'Modele/chien.class.php';
 require_once 'Modele/Bd.class.php';
+require_once 'Modele/refuge.class.php';
 ?>

@@ -15,11 +15,19 @@ class ChienControleur extends Controleur {
 
     public function liste() {
         $chienModele = new Chien($this->pdo);
+        $refugeModele = new Refuge($this->pdo);
+    
+        // Récupération des données
         $chiens = $chienModele->getAll();
-        echo $this->twig->render('liste_chiens.html.twig', ['chiens' => $chiens]);
-
-        return;  // Retour explicite
+        $refuges = $refugeModele->getAll();
+    
+        // Transmission des données au template
+        echo $this->twig->render('liste_chiens.html.twig', [
+            'chiens' => $chiens,
+            'refuges' => $refuges
+        ]);
     }
+    
     
 
     public function creer() {
