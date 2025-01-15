@@ -2,6 +2,7 @@
 require_once 'include.php';
 
 $pdo = Bd::getInstance()->getConnexion();
+try{
 if (isset($_GET['controleur'])) {
     $controleurName = $_GET['controleur'];
  }else {
@@ -26,31 +27,11 @@ if (isset($_GET['controleur'])) {
  $controleur = ControleurFactory::getController($controleurName, $loader, $twig, $pdo);
 
  $controleur->call($methode);
-
+} catch (Exception $e) {
+    die("Erreur : ".$e->getMessage());
+ }
 
 $action = $_GET['action'] ?? 'list';
 
-switch ($action) {
-    case 'list':
-        $chienControleur->liste();
-        break;
-    case 'create':
-        $chienControleur->creer();
-        break;
-    case 'store':
-        $chienControleur->enregistrer();
-        break;
-    case 'edit':
-        $chienControleur->modifier();
-        break;
-    case 'update':
-        $chienControleur->mettreAJour();
-        break;
-    case 'delete':
-        $chienControleur->supprimer();
-        break;
-    default:
-        $chienControleur->liste();
-        break;
-}
+
 ?>

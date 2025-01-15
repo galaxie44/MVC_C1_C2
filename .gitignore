@@ -1,0 +1,10 @@
+.idea
+.vscode
+vendor
+composer.json
+package-lock.json
+package.json
+node_modules
+composer.lock
+config/constantes.yaml
+docs

@@ -25,17 +25,17 @@
                 <td>{{ chien.nom }}</td>
                 <td>{{ chien.age }}</td>
                 <td>{{ chien.race }}</td>
-                <td><img src="{{ chien.photo }}" alt="Photo du chien" width="100"></td>
+                <td><img src="img/{{ chien.photo }}" alt="Photo du chien" width="100"></td>
                 <td>{{ chien.refuge_id ? chien.refuge_id : 'Aucun refuge' }}</td>
                 <td>
-                    <a href="index.php?action=edit&id={{ chien.id }}">Modifier</a>
-                    <a href="index.php?action=delete&id={{ chien.id }}" onclick="return confirm('Voulez-vous vraiment supprimer ce chien ?');">Supprimer</a>
+                    <a href="index.php?controleur=chien&methode=modifier&id={{ chien.id }}">Modifier</a>
+                    <a href="index.php?controleur=chien&methode=supprimer&action=delete&id={{ chien.id }}" onclick="return confirm('Voulez-vous vraiment supprimer ce chien ?');">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="index.php?action=create">Ajouter un chien</a>
+    <a href="index.php?controleur=chien&methode=creer">Ajouter un chien</a>
 </body>
 </html>

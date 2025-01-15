@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Modifier un Chien</h2>
-<form action="index.php?action=update" method="post">
+<form action="index.php?controleur=chien&methode=mettreAJour" method="post">
     <input type="hidden" name="id" value="{{ chien.id }}">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" value="{{ chien.nom }}">

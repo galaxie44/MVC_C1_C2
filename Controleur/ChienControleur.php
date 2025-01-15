@@ -14,21 +14,30 @@ class ChienControleur extends Controleur {
     }
 
     public function liste() {
-        $chienModele = new Chien($this->pdo);  // On passe ici l'instance de PDO au modèle Chien
+        $chienModele = new Chien($this->pdo);
         $chiens = $chienModele->getAll();
         echo $this->twig->render('liste_chiens.html.twig', ['chiens' => $chiens]);
+
+        return;  // Retour explicite
     }
+    
 
     public function creer() {
         echo $this->twig->render('creer_chien.html.twig');
     }
 
     public function enregistrer() {
+        $dir = "img"; // Nom du dossier contenant les photos
+
+        if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+            $name = $_POST["nom"].".png";
+            move_uploaded_file($_FILES["image"]["tmp_name"], "$dir/$name");
+        }
         $data = [
             'nom' => $_POST['nom'],
             'age' => $_POST['age'],
             'race' => $_POST['race'],
-            'photo' => $_POST['photo'],
+            'photo' => $name,
             'refuge_id' => $_POST['refuge_id'] ?? null
         ];
         $chienModele = new Chien($this->pdo);

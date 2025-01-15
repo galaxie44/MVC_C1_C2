@@ -59,12 +59,13 @@ class Controleur{
      *
      * @return mixed
      */
-    public function call(string $methode): mixed{
-        if (!method_exists($this, $methode)) {
-            throw new Exception("La méthode $methode n'existe pas dans le controller ".__CLASS__);
-        }
-        return $this->$methode();
+    public function call(string $methode){
+    if (!method_exists($this, $methode)) {
+        throw new Exception("La méthode $methode n'existe pas dans le controller ".__CLASS__);
     }
+    return $this->$methode();
+}
+
 
     /**
      * @brief Retourne l'objet PDO de connexion à la base de données
