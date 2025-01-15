@@ -1,0 +1,18 @@
+{% extends 'base_template.html.twig' %}
+
+{% block title %}Créer un Chien{% endblock %}
+
+{% block content %}
+<h2>Créer un Chien</h2>
+<form action="index.php?action=store" method="post">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom">
+    <label for="age">Âge :</label>
+    <input type="number" id="age" name="age">
+    <label for="race">Race :</label>
+    <input type="text" id="race" name="race">
+    <label for="photo">Photo (URL) :</label>
+    <input type="text" id="photo" name="photo">
+    <button type="submit">Créer</button>
+</form>
+{% endblock %}
