@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Refuge</title>
+</head>
+<body>
+    <h1>Modifier un Refuge</h1>
+
+    <form action="index.php?controleur=refuge&methode=mettreAJour" method="POST">
+        <input type="hidden" name="id" value="{{ refuge.id }}">
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" value="{{ refuge.nom }}" required>
+        <br>
+
+        <label for="adresse">Adresse :</label>
+        <textarea id="adresse" name="adresse" required>{{ refuge.adresse }}</textarea>
+        <br>
+
+        <label for="capacite">Capacité :</label>
+        <input type="number" id="capacite" name="capacite" value="{{ refuge.capacite }}" required>
+        <br>
+
+        <label for="places_restantes">Places restantes :</label>
+        <input type="number" id="places_restantes" name="places_restantes" value="{{ refuge.places_restantes }}" required>
+        <br>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>

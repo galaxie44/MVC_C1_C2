@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Refuges</title>
+</head>
+<body>
+    <h1>Liste des Refuges</h1>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Capacité</th>
+                <th>Places restantes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for refuge in refuges %}
+            <tr>
+                <td>{{ refuge.nom }}</td>
+                <td>{{ refuge.adresse }}</td>
+                <td>{{ refuge.capacite }}</td>
+                <td>{{ refuge.places_restantes }}</td>
+                <td>
+                    <a href="index.php?controleur=refuge&methode=modifier&id={{ refuge.id }}">Modifier</a>
+                    <a href="index.php?controleur=refuge&methode=supprimer&action=delete&id={{ refuge.id }}" onclick="return confirm('Voulez-vous vraiment supprimer ce refuge ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="index.php?controleur=refuge&methode=creer">Ajouter un refuge</a>
+</body>
+</html>
