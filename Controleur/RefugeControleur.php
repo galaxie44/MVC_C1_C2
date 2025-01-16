@@ -90,4 +90,23 @@ class RefugeControleur extends Controleur {
     echo $this->twig->render("ajouter_chien_a_refuge.html.twig",['refuge_id' => $idRefuge]);
     
     }
+
+    public function listerChiensEtRefuges() {
+        $chienModele = new Chien($this->pdo);
+        $refugeModele = new Refuge($this->pdo);
+    
+        // Récupérer la liste des chiens et des refuges
+        $chiens = $chienModele->getAll();
+        $refuges = $refugeModele->getAll();
+    
+        // Rendre la page avec les chiens et les refuges
+        echo $this->twig->render('ajouter_chien_a_refuge.html.twig', [
+            'chiens' => $chiens,
+            'refuges' => $refuges
+        ]);
+    }
+    
+    
 }
+
+

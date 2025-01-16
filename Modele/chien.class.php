@@ -34,15 +34,11 @@ class Chien {
         $stmt = $this->pdo->prepare('DELETE FROM chien WHERE id = ?');
         $stmt->execute([$id]);
     }
-
-    public function decrementPlaces($refugeId) {
-        $stmt = $this->pdo->prepare('UPDATE refuge SET places_restantes = places_restantes - 1 WHERE id = ? AND places_restantes > 0');
-        $stmt->execute([$refugeId]);
-    }
     
-    public function incrementPlaces($refugeId) {
-        $stmt = $this->pdo->prepare('UPDATE refuge SET places_restantes = places_restantes + 1 WHERE id = ? AND places_restantes < capacite');
-        $stmt->execute([$refugeId]);
+    public function associerChienARefuge($chien_id, $refuge_id) {
+        // Mise à jour du refuge_id du chien dans la base de données
+        $stmt = $this->pdo->prepare('UPDATE chien SET refuge_id = ? WHERE id = ?');
+        $stmt->execute([$refuge_id, $chien_id]);
     }
     
 }

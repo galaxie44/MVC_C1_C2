@@ -68,12 +68,22 @@ class Refuge {
     public function ajouterChienARefuge($idchien, $idrefuge ){
         $stmt = $this->pdo->prepare('INSERT INTO chien_refuge (chien_id, refuge_id) VALUES  (?,?);');
         $stmt->execute([$chien, $idrefuge]);
-
-
     }
 
     public function calcule($idRefuge){
         $stmt = $this->pdo->prepare('SELECT capacite - ( select count(chien_id) from chien_refuge where refuge_id = ? group by refuge_id ) from refuge where id = ?;');
+    }
+    public function decrementerPlacesRestantes($refuge_id) {
+        // Récupérer le nombre de places restantes avant de faire la mise à jour
+        $stmt = $this->pdo->prepare('SELECT places_restantes FROM refuge WHERE id = ?');
+        $stmt->execute([$refuge_id]);
+        $refuge = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($refuge && $refuge['places_restantes'] > 0) {
+            // Décrémente le nombre de places restantes
+            $stmt = $this->pdo->prepare('UPDATE refuge SET places_restantes = places_restantes - 1 WHERE id = ?');
+            $stmt->execute([$refuge_id]);
+        }
     }
 
 

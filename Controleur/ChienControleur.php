@@ -58,6 +58,28 @@ class ChienControleur extends Controleur {
         echo $this->twig->render('modifier_chien.html.twig', ['chien' => $chien]);
     }
 
+    public function associer_refuge() {
+        // Récupérer les données envoyées par le formulaire
+        $chien_id = $_POST['chien_id'];
+        $refuge_id = $_POST['refuge_id'];
+
+        if ($chien_id && $refuge_id) {
+            $chienModele = new Chien($this->pdo);
+            $refugeModele = new Refuge($this->pdo);
+
+            // Associer le chien au refuge
+            $chienModele->associerChienARefuge($chien_id, $refuge_id);
+            $refugeModele->decrementerPlacesRestantes($refuge_id);
+
+            // Rediriger vers la page d'ajout de chien au refuge
+            header("Location: index.php?controleur=refuge&methode=listerChiensEtRefuges");
+            exit;
+        } else {
+            // Afficher une erreur si des données sont manquantes
+            echo "Erreur : Veuillez sélectionner un chien et un refuge.";
+        }
+    }
+
     public function mettreAJour() {
         $data = [
             'id' => $_POST['id'],
