@@ -1,42 +1,55 @@
 {% extends 'base_template.html.twig' %}
-{% block title %}Ajouter un chien a un refuge{% endblock %}
+
+{% block title %}Associer un chien à un refuge{% endblock %}
+
 {% block content %}
 <body>
-    <h1>Ajouter un Chien</h1>
+    <h1>Associer un Chien à un Refuge</h1>
 
-    <form action="index.php?controleur=chien&methode=enregistrer" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="nom">Nom du chien :</label>
-            <input type="text" id="nom" name="nom" required>
-        </div>
-
-        <div>
-            <label for="age">Âge :</label>
-            <input type="number" id="age" name="age" min="0" required>
-        </div>
-
-        <div>
-            <label for="race">Race :</label>
-            <input type="text" id="race" name="race" required>
-        </div>
-
-        <div>
-            <label for="image">Photo :</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
-        </div>
-
-        <div>
-            <label for="refuge_id">Refuge :</label>
-            <select id="refuge_id" name="refuge_id">
-                <option value="">Aucun refuge</option>
-                {% for refuge in refuges %}
-                <option value="{{ refuge.id }}">{{ refuge.nom }} ({{ refuge.places_restantes }} places restantes)</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <button type="submit">Ajouter le chien</button>
-    </form>
+    <h2>Liste des Chiens</h2>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Âge</th>
+                <th>Race</th>
+                <th>Refuge actuel</th>
+                <th>Ajouter au Refuge</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chien in chiens %}
+            <tr>
+                <td>{{ chien.nom }}</td>
+                <td>{{ chien.age }}</td>
+                <td>{{ chien.race }}</td>
+                <td>
+                    {% if chien.refuge_id %}
+                        {% for refuge in refuges %}
+                            {% if refuge.id == chien.refuge_id %}
+                                {{ refuge.nom }}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Aucun refuge
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="index.php?controleur=chien&methode=associer_refuge" method="post">
+                        <input type="hidden" name="chien_id" value="{{ chien.id }}">
+                        <select name="refuge_id">
+                            <option value="">Choisir un refuge</option>
+                            {% for refuge in refuges %}
+                            <option value="{{ refuge.id }}">{{ refuge.nom }} ({{ refuge.places_restantes }} places restantes)</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Associer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <p><a href="index.php?controleur=chien&methode=liste">Retour à la liste des chiens</a></p>
 </body>

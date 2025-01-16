@@ -25,7 +25,7 @@
                     <a href="index.php?controleur=refuge&methode=modifier&id={{ refuge.id }}">Modifier</a>
                     <a href="index.php?controleur=refuge&methode=supprimer&action=delete&id={{ refuge.id }}" onclick="return confirm('Voulez-vous vraiment supprimer ce refuge ?');">Supprimer</a>
                     <br>
-                    <a href="index.php?controleur=chien&methode=creer&refuge_id={{ refuge.id }}">Ajouter un chien</a>
+                    <a href="index.php?controleur=refuge&methode=afficherFormulaireAjoutChien&refuge_id={{ refuge.id }}">Ajouter un chien</a>
                 </td>
             </tr>
             {% endfor %}

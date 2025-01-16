@@ -82,4 +82,12 @@ class RefugeControleur extends Controleur {
         $refugeModele->delete($id);
         $this->liste();
     }
+
+
+    public function afficherFormulaireAjoutChien(){
+    $idRefuge =$_GET['refuge_id'];
+    
+    echo $this->twig->render("ajouter_chien_a_refuge.html.twig",['refuge_id' => $idRefuge]);
+    
+    }
 }

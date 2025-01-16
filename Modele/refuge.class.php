@@ -68,7 +68,14 @@ class Refuge {
     public function ajouterChienARefuge($idchien, $idrefuge ){
         $stmt = $this->pdo->prepare('INSERT INTO chien_refuge (chien_id, refuge_id) VALUES  (?,?);');
         $stmt->execute([$chien, $idrefuge]);
+
+
     }
+
+    public function calcule($idRefuge){
+        $stmt = $this->pdo->prepare('SELECT capacite - ( select count(chien_id) from chien_refuge where refuge_id = ? group by refuge_id ) from refuge where id = ?;');
+    }
+
 
     
 }
