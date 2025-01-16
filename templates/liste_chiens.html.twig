@@ -1,11 +1,9 @@
-
-
 {% extends 'base_template.html.twig' %}
-{% block title %}Lister des chiens{% endblock %}
+
+{% block title %}Liste des Chiens{% endblock %}
+
 {% block content %}
-<body>
     <h1>Liste des Chiens</h1>
-    <link rel="stylesheet" href="chemin/vers/styles.css">
     <a href ="index.php?controleur=refuge&methode=liste"> Liste des refuges <a>
     <table border="1" cellpadding="10">
         <thead>
@@ -13,8 +11,8 @@
                 <th>Nom</th>
                 <th>Âge</th>
                 <th>Race</th>
+                <th>Refuge actuel</th>
                 <th>Photo</th>
-                <th>Refuge</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,28 +22,28 @@
                 <td>{{ chien.nom }}</td>
                 <td>{{ chien.age }}</td>
                 <td>{{ chien.race }}</td>
-                <td><img src="img/{{ chien.photo }}" alt="Photo du chien" width="100"></td>
                 <td>
-                    {% if chien.refuge_id %}
-                        {% for refuge in refuges %}
-                            {% if refuge.id == chien.refuge_id %}
-                                {{ refuge.nom }}
-                            {% endif %}
-                        {% endfor %}
+                    {% if chien.refuge_nom %}
+                        {{ chien.refuge_nom }}
                     {% else %}
                         Aucun refuge
                     {% endif %}
                 </td>
                 <td>
-                    <a href="index.php?controleur=chien&methode=modifier&id={{ chien.id }}">Modifier</a>
-                    <a href="index.php?controleur=chien&methode=supprimer&action=delete&id={{ chien.id }}" onclick="return confirm('Voulez-vous vraiment supprimer ce chien ?');">Supprimer</a>
+                    {% if chien.photo %}
+                        <img src="img/{{ chien.photo }}" alt="Photo de {{ chien.nom }}" style="width:100px;height:auto;">
+                    {% else %}
+                        Pas de photo
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="index.php?controleur=chien&methode=modifier&id={{ chien.id }}">Modifier</a> | 
+                    <a href="index.php?controleur=chien&methode=supprimer&id={{ chien.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce chien ?')">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
     <a href="index.php?controleur=chien&methode=creer">Ajouter un chien</a>
-</body>
-</html>
+    
 {% endblock %}

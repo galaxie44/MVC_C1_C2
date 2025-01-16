@@ -11,7 +11,26 @@ class Chien {
     public function getAll() {
         $stmt = $this->pdo->prepare('SELECT * FROM chien');
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $chiens = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        // Pour chaque chien, on récupère le refuge associé (si existant)
+        foreach ($chiens as &$chien) {
+            $chien['refuge_nom'] = $this->getRefugeNom($chien['refuge_id']);
+        }
+
+        return $chiens;
+    }
+
+    public function getRefugeNom($refuge_id) {
+        if (!$refuge_id) {
+            return null; // Aucun refuge associé
+        }
+
+        $stmt = $this->pdo->prepare('SELECT nom FROM refuge WHERE id = ?');
+        $stmt->execute([$refuge_id]);
+        $refuge = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $refuge ? $refuge['nom'] : null; // Retourne le nom du refuge, ou null si non trouvé
     }
 
     public function store($data) {
@@ -40,6 +59,7 @@ class Chien {
         $stmt = $this->pdo->prepare('UPDATE chien SET refuge_id = ? WHERE id = ?');
         $stmt->execute([$refuge_id, $chien_id]);
     }
+    
     
 }
 ?>
