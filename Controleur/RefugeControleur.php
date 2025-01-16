@@ -16,7 +16,7 @@ class RefugeControleur extends Controleur {
     public function liste() {
         $refugeModele = new Refuge($this->pdo);
         $refuges = $refugeModele->getAll();
-        echo $this->twig->render('liste_refuges.html.twig', ['refuges' => $refuges]);
+        echo $this->twig->render('liste_refuge.html.twig', ['refuges' => $refuges]);
 
         return;  // Retour explicite
     }
@@ -41,7 +41,7 @@ class RefugeControleur extends Controleur {
 
         $refugeModele = new Refuge($this->pdo);
         $refugeModele->store($data);
-        echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+        $this->liste();
     }
 
     /**
@@ -68,7 +68,7 @@ class RefugeControleur extends Controleur {
 
         $refugeModele = new Refuge($this->pdo);
         $refugeModele->update($data);
-        echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+        $this->liste();
     }
 
     /**
@@ -78,6 +78,6 @@ class RefugeControleur extends Controleur {
         $id = $_GET['id'];
         $refugeModele = new Refuge($this->pdo);
         $refugeModele->delete($id);
-        echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+        $this->liste();
     }
 }

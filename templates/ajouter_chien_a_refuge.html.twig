@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Chien</title>
+</head>
+<body>
+    <h1>Ajouter un Chien</h1>
+
+    <form action="index.php?controleur=chien&methode=enregistrer" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="nom">Nom du chien :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <div>
+            <label for="age">Âge :</label>
+            <input type="number" id="age" name="age" min="0" required>
+        </div>
+
+        <div>
+            <label for="race">Race :</label>
+            <input type="text" id="race" name="race" required>
+        </div>
+
+        <div>
+            <label for="image">Photo :</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <div>
+            <label for="refuge_id">Refuge :</label>
+            <select id="refuge_id" name="refuge_id">
+                <option value="">Aucun refuge</option>
+                {% for refuge in refuges %}
+                <option value="{{ refuge.id }}">{{ refuge.nom }} ({{ refuge.places_restantes }} places restantes)</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Ajouter le chien</button>
+    </form>
+
+    <p><a href="index.php?controleur=chien&methode=liste">Retour à la liste des chiens</a></p>
+</body>
+</html>
