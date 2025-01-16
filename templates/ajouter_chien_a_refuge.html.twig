@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Chien</title>
-</head>
+{% extends 'base_template.html.twig' %}
+{% block title %}Ajouter un chien a un refuge{% endblock %}
+{% block content %}
 <body>
     <h1>Ajouter un Chien</h1>
 
@@ -45,3 +41,4 @@
     <p><a href="index.php?controleur=chien&methode=liste">Retour à la liste des chiens</a></p>
 </body>
 </html>
+{% endblock %}

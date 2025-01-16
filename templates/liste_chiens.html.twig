@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Chiens</title>
-</head>
+
+
+{% extends 'base_template.html.twig' %}
+{% block title %}Lister des chiens{% endblock %}
+{% block content %}
 <body>
     <h1>Liste des Chiens</h1>
+    <link rel="stylesheet" href="chemin/vers/styles.css">
     <a href ="index.php?controleur=refuge&methode=liste"> Liste des refuges <a>
     <table border="1" cellpadding="10">
         <thead>
@@ -49,3 +48,4 @@
     <a href="index.php?controleur=chien&methode=creer">Ajouter un chien</a>
 </body>
 </html>
+{% endblock %}

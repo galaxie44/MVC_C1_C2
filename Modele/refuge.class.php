@@ -65,4 +65,10 @@ class Refuge {
         $stmt = $this->pdo->prepare('DELETE FROM refuge WHERE id = ?');
         $stmt->execute([$id]);
     }
+    public function ajouterChienARefuge($idchien, $idrefuge ){
+        $stmt = $this->pdo->prepare('INSERT INTO chien_refuge (chien_id, refuge_id) VALUES  (?,?);');
+        $stmt->execute([$chien, $idrefuge]);
+    }
+
+    
 }

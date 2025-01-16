@@ -17,6 +17,7 @@ class RefugeControleur extends Controleur {
         $refugeModele = new Refuge($this->pdo);
         $refuges = $refugeModele->getAll();
         echo $this->twig->render('liste_refuge.html.twig', ['refuges' => $refuges]);
+        //$refugeModele->calcule();
 
         return;  // Retour explicite
     }
@@ -68,6 +69,7 @@ class RefugeControleur extends Controleur {
 
         $refugeModele = new Refuge($this->pdo);
         $refugeModele->update($data);
+        
         $this->liste();
     }
 
